@@ -1,22 +1,23 @@
+
 {
-  "name": "weconnect",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
+  "name": "weconnect-app",
+  "version": "1.0.2",
+  "description": "WeConnect WeChat-like Mobile App",
+  "main": "index.tsx",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
+    "start": "npx servor . index.html 8080",
+    "build": "echo 'Building web assets...'",
+    "cap-sync": "npx cap sync android",
+    "android-open": "npx cap open android"
   },
   "dependencies": {
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
-    "@google/genai": "^1.37.0"
+    "@google/genai": "^1.37.0",
+    "@capacitor/core": "^6.0.0",
+    "@capacitor/android": "^6.0.0"
   },
   "devDependencies": {
-    "@types/node": "^22.14.0",
-    "@vitejs/plugin-react": "^5.0.0",
-    "typescript": "~5.8.2",
-    "vite": "^6.2.0"
+    "@capacitor/cli": "^6.0.0"
   }
 }
