@@ -1,0 +1,16 @@
+
+{
+  "short_name": "微连",
+  "name": "微连 WeConnect",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/3670/3670051.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#07C160",
+  "background_color": "#EDEDED"
+}

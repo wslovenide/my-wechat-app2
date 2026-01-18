@@ -1,0 +1,8 @@
+{
+  "name": "WeConnect",
+  "description": "A mobile-first messaging application inspired by WeChat, featuring secure login, real-time AI-powered chat, and a familiar social interface.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
