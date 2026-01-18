@@ -30,28 +30,19 @@ jobs:
       - name: Install Dependencies
         run: |
           npm install
-          npm install @capacitor/core @capacitor/cli @capacitor/android
           
       - name: Build Web App
         run: |
-          # 确保 webDir 存在且包含 index.html
-          mkdir -p dist
-          cp index.html dist/
-          cp index.tsx dist/
-          cp manifest.json dist/
-          cp sw.js dist/
-          cp types.ts dist/
-          cp constants.tsx dist/
-          cp -r components dist/ || true
-          cp -r services dist/ || true
-          echo "Build finished"
+          # 仅作为标记，实际 Capacitor 使用根目录
+          echo "Preparing assets..."
 
       - name: Capacitor Sync
         run: |
-          # 重新初始化以确保路径正确
+          # 使用 npx 确保使用项目内的 CLI 和 TypeScript
           npx cap init WeConnect com.weconnect.app --web-dir . --npx
           npx cap add android || echo "Android already added"
           npx cap copy android
+          npx cap sync android
 
       - name: Build with Gradle
         run: |
