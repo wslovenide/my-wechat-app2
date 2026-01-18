@@ -31,25 +31,18 @@ jobs:
         run: |
           npm install
           
-      - name: Prepare Distribution Folder
+      - name: Build Web Project
         run: |
-          # Capacitor 需要一个真实的构建目录，不能是 "."
+          # 创建 dist 目录并打包
           mkdir -p dist
-          # 拷贝所有前端运行时需要的文件
-          cp index.html dist/
-          cp index.tsx dist/
-          cp manifest.json dist/
-          cp sw.js dist/
-          cp types.ts dist/
-          cp constants.tsx dist/
-          cp -r components dist/ || true
-          cp -r services dist/ || true
-          echo "Web assets prepared in dist/ directory"
+          npm run build
+          # 拷贝静态资源到 dist
+          cp index.html manifest.json sw.js dist/ 2>/dev/null || true
+          echo "Web bundle created in dist/ directory"
 
       - name: Capacitor Sync
         run: |
-          # 添加安卓平台（如果不存在）并同步 dist 目录的内容
-          npx cap add android || echo "Android platform might already exist"
+          npx cap add android || echo "Android platform already exists"
           npx cap sync android
 
       - name: Build with Gradle

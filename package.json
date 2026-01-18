@@ -1,12 +1,12 @@
 
 {
   "name": "weconnect-app",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "WeConnect WeChat-like Mobile App",
   "main": "index.tsx",
   "scripts": {
     "start": "npx servor . index.html 8080",
-    "build": "mkdir -p dist && cp index.html index.tsx manifest.json sw.js types.ts constants.tsx dist/ && cp -r components services dist/ || true",
+    "build": "npx esbuild index.tsx --bundle --outfile=dist/bundle.js --minify --format=esm --loader:.tsx=tsx --loader:.ts=ts",
     "cap-sync": "npm run build && npx cap sync android",
     "android-open": "npx cap open android"
   },
@@ -20,6 +20,7 @@
   "devDependencies": {
     "@capacitor/cli": "^6.0.0",
     "typescript": "^5.4.5",
+    "esbuild": "^0.20.2",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "@types/node": "^20.12.7"
