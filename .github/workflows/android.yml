@@ -1,0 +1,66 @@
+
+name: Build Android APK
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install Dependencies
+        run: |
+          npm install
+          npm install @capacitor/core @capacitor/cli @capacitor/android
+          
+      - name: Build Web App
+        run: |
+          # 确保 webDir 存在且包含 index.html
+          mkdir -p dist
+          cp index.html dist/
+          cp index.tsx dist/
+          cp manifest.json dist/
+          cp sw.js dist/
+          cp types.ts dist/
+          cp constants.tsx dist/
+          cp -r components dist/ || true
+          cp -r services dist/ || true
+          echo "Build finished"
+
+      - name: Capacitor Sync
+        run: |
+          # 重新初始化以确保路径正确
+          npx cap init WeConnect com.weconnect.app --web-dir . --npx
+          npx cap add android || echo "Android already added"
+          npx cap copy android
+
+      - name: Build with Gradle
+        run: |
+          cd android
+          chmod +x gradlew
+          ./gradlew assembleDebug
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: weconnect-app-debug
+          path: android/app/build/outputs/apk/debug/app-debug.apk
