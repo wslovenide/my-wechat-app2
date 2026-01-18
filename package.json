@@ -1,12 +1,12 @@
 
 {
   "name": "weconnect-app",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "WeConnect WeChat-like Mobile App",
   "main": "index.tsx",
   "scripts": {
     "start": "npx servor . index.html 8080",
-    "build": "echo 'Building web assets...'",
+    "build": "echo 'Prepared for Capacitor build'",
     "cap-sync": "npx cap sync android",
     "android-open": "npx cap open android"
   },

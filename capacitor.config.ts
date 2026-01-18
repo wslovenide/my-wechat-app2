@@ -5,9 +5,9 @@ const config: CapacitorConfig = {
   appId: 'com.weconnect.app',
   appName: '微连 WeConnect',
   webDir: '.',
-  bundledWebRuntime: false,
   server: {
-    androidScheme: 'https'
+    androidScheme: 'https',
+    cleartext: true
   }
 };
 
